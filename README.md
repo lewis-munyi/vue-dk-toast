@@ -1,6 +1,6 @@
 # vue-dk-toast
 
-Lightweight toast-notification plugin for Vue3.
+Lightweight toast-notification plugin for Vue 3.
 
 [Demo](https://vue-dk-toast.netlify.app/)
 
@@ -77,7 +77,8 @@ this.$toast('Simple!', {
     styles: {
         borderRadius: '25px',
     },
-    slot: '<i class="fa fa-thumbs-up"></i>', // Add icon to right
+    // Any valid HTML, intended for icons
     slotLeft: '<i class="fa fa-user"></i>', // Add icon to left
+    slotRight: '<i class="fa fa-thumbs-up"></i>', // Add icon to right
 });
 ```

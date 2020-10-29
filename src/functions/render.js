@@ -1,4 +1,5 @@
 import { formatCssProperties } from './styles';
+import { validateLocalOptions } from './validate';
 
 const renderToast = (app, options) => {
     // Render toast container
@@ -15,58 +16,28 @@ const renderToast = (app, options) => {
 
     // Render individual toast
     const DKToast = (text, localOptions) => {
+        if (!localOptions) localOptions = {};
         const toast = document.createElement('div');
+        const left = localOptions.slotLeft;
+        const right = localOptions.slot || localOptions.slotRight;
         let duration, styles, clicked;
 
-        if (!localOptions) localOptions = {};
+        if (!validateLocalOptions(text, localOptions)) return;
 
-        // If none
-        if (!text && !localOptions.slot && !localOptions.slotLeft){
-            return console.error('vue-dk-toast [Error]: a text value is required');
-        }
         toast.className = 'dk__toast';
 
-        // If empty text
-        if(!text == ' ') toast.innerHTML = `<div> </div>`;
-
         // If text
-        if(text){
-            toast.innerHTML = `<div>${text}</div>`;
+        if (text) toast.textContent = text;
+        // If left slot
+        if (left) {
+            toast.innerHTML = `<div class="dk__icon-left">${left}</div>` + toast.innerHTML;
         }
-
-        // If text + left icon
-        if(text && localOptions.slotLeft){
-            toast.innerHTML = localOptions.slotLeft + toast.innerHTML
+        // If right slot
+        if (right) {
+            toast.innerHTML += `<div class="dk__icon-right">${right}</div>`;
         }
-
-        // If text + right icon
-        if (text && localOptions.slot){
-            toast.innerHTML += localOptions.slot
-        }
-
-        // If left + text + right icon
-        if(!text && localOptions.slotLeft && localOptions.slot){
-            toast.innerHTML = localOptions.slotLeft + toast.innerHTML + localOptions.slot
-            toast.classList.add('dk__icon-only')
-        }
-
-        // If left icon only
-        if(!text && localOptions.slotLeft && !localOptions.slot){
-            toast.innerHTML = localOptions.slotLeft
-            toast.classList.add('dk__icon-only')
-        }
-
-        //  If right icon only
-        if(!text && !localOptions.slotLeft && localOptions.slot){
-            toast.innerHTML = localOptions.slot
-            toast.classList.add('dk__icon-only')
-        }
-
-        // If only left and right icon
-        if(!text && localOptions.slotLeft && localOptions.slot){
-            toast.innerHTML = localOptions.slotLeft + localOptions.slot
-            toast.classList.add('dk__icon-only')
-        }
+        // If slot only
+        if (!text && (left || right)) toast.classList.add('dk__icon-only');
 
         // Set custom local styles
         duration = localOptions.duration ? localOptions.duration : options.duration;

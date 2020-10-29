@@ -8,64 +8,58 @@ export default {
 
     methods: {
         toast() {
+            this.$toast('');
+            this.$toast('text only');
+            this.$toast('text with options', {
+                duration: 100000,
+                styles: { border: '1px solid' },
+            });
+            this.$toast('long text long text long text long text long text long text', {
+                duration: 100000,
+                styles: { border: '1px solid' },
+            });
+            this.$toast('text + right icon ', {
+                duration: 100000,
+                styles: { border: '1px solid' },
+                slot: '<i class="fa fa-thumbs-up"></i>',
+            });
+            this.$toast('text + left icon ', {
+                duration: 100000,
+                styles: { border: '1px solid' },
+                slotLeft: '<i class="fa fa-thumbs-up"></i>',
+            });
+            this.$toast('text + right + left icon', {
+                duration: 100000,
+                styles: { border: '1px solid' },
+                slotLeft: '<i class="fa fa-thumbs-up"></i>',
+                slotRight: '<i class="fa fa-thumbs-up"></i>',
+            });
             this.$toast('', {
                 duration: 100000,
                 styles: { border: '1px solid' },
+                slotRight: '<i class="fa fa-thumbs-up"></i>',
             });
-            this.$toast('text only', {
+            this.$toast('', {
                 duration: 100000,
                 styles: { border: '1px solid' },
+                slotLeft: '<i class="fa fa-thumbs-up"></i>',
             });
-            this.$toast(
-                'text + right icon ',
-                {
-                    duration: 100000,
-                    styles: { border: '1px solid' },
-                    slot: '<i class="fa fa-thumbs-up"></i>',
-                }
-            );
-            this.$toast(
-                'text + left icon ',
-                {
-                    duration: 100000,
-                    styles: { border: '1px solid' },
-                    slotLeft: '<i class="fa fa-thumbs-up"></i>',
-                }
-            );
-            this.$toast(
-                'text + right + left icon',
-                {
-                    duration: 100000,
-                    styles: { border: '1px solid' },
-                    slotLeft: '<i class="fa fa-thumbs-up"></i>',
-                    slot: '<i class="fa fa-thumbs-up"></i>',
-                }
-            );
-            this.$toast(
-                '',
-                {
-                    duration: 100000,
-                    styles: { border: '1px solid' },
-                    slot: '<i class="fa fa-thumbs-up"></i>',
-                }
-            );
-            this.$toast(
-                '',
-                {
-                    duration: 100000,
-                    styles: { border: '1px solid' },
-                    slotLeft: '<i class="fa fa-thumbs-up"></i>',
-                }
-            );
-            this.$toast(
-                '',
-                {
-                    duration: 100000,
-                    styles: { border: '1px solid' },
-                    slotLeft: '<i class="fa fa-thumbs-up"></i>',
-                    slot: '<i class="fa fa-thumbs-up"></i>',
-                }
-            );
+            this.$toast('', {
+                duration: 100000,
+                styles: { border: '1px solid' },
+                slotLeft: '<i class="fa fa-thumbs-up"></i>',
+                slotRight: '<i class="fa fa-thumbs-up"></i>',
+            });
+            this.$toast('', {
+                duration: 100000,
+                slotLeft: '<i class="fa fa-thumbs-up"></i>',
+                slotRight: '<span class="material-icons">thumb_up</span>',
+            });
+            this.$toast('mixed icons', {
+                duration: 100000,
+                slotLeft: '<i class="fa fa-thumbs-up"></i>',
+                slotRight: '<span class="material-icons">thumb_up</span>',
+            });
         },
     },
 };
